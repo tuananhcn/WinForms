@@ -26,18 +26,34 @@ namespace WindowsFormsApp2
             try
             {
                 string strConnection = System.Configuration.ConfigurationSettings.AppSettings["MyCNN"].ToString();
-                string strCommand = "Insert into [dbo].[DANHSACHSINHVIEN] values (@idlop,@idtaikhoan,@iddssv) ";
+                string insertStudentSql = "INSERT INTO [dbo].[DANHSACHSINHVIEN] VALUES (@idlop, @idtaikhoan, @iddssv)";
+                string insertScoreSql = "INSERT INTO [DIEMSO] VALUES (@iddssv,0,0,0)";
+                /*string insertAttendanceSql = "INSERT INTO [DIEMDANH] VALUES (@iddssv,0,0)";*/
                 SqlConnection myConnection = new SqlConnection(strConnection);
                 myConnection.Open();
                 //Command Select
-                SqlCommand myCommand = new SqlCommand(strCommand, myConnection);
-                //Truyền tham số
-                myCommand.Parameters.AddWithValue("@idlop", _idlop);
-                myCommand.Parameters.AddWithValue("@idtaikhoan", this.textBox1.Text);
-                myCommand.Parameters.AddWithValue("@iddssv", this.textBox2.Text);
+                using (SqlCommand myCommand = new SqlCommand(insertStudentSql, myConnection))
+                {
+                    myCommand.Parameters.AddWithValue("@idlop", _idlop);
+                    myCommand.Parameters.AddWithValue("@idtaikhoan", this.textBox1.Text);
+                    myCommand.Parameters.AddWithValue("@iddssv", this.textBox2.Text);
+                    myCommand.ExecuteNonQuery();
+                }
                 //Thực thi câu lệnh
-                myCommand.ExecuteNonQuery();
-                myConnection.Close();
+                using (SqlCommand myCommand = new SqlCommand(insertScoreSql, myConnection))
+                {
+                    myCommand.Parameters.AddWithValue("@iddssv", this.textBox2.Text);
+                    myCommand.ExecuteNonQuery();
+
+                }
+                /*using (SqlCommand myCommand = new SqlCommand(insertAttendanceSql, myConnection))
+                {
+                    myCommand.Parameters.AddWithValue("@iddssv", this.textBox2.Text);
+                    myCommand.ExecuteNonQuery();
+
+                }*/
+                MessageBox.Show("Them thanh cong", "Thanh cong", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();            
             }
             catch (System.Exception ex)
             {

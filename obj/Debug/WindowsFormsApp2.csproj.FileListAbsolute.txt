@@ -14,3 +14,6 @@ C:\Users\Admin\source\repos\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form4.re
 C:\Users\Admin\source\repos\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Lichhoc.resources
 C:\Users\Admin\source\repos\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form3.resources
 C:\Users\Admin\source\repos\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form6.resources
+C:\Users\Admin\source\repos\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form5.resources
+C:\Users\Admin\source\repos\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form7.resources
+C:\Users\Admin\source\repos\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form8.resources

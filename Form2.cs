@@ -13,13 +13,15 @@ namespace WindowsFormsApp2
 {
     public partial class Form2 : Form
     {
-        string _quyenhan;
+        int _quyenhan;
+        string _tendangnhap;
         public delegate void ShowForm1Delegate();
         public ShowForm1Delegate ShowForm1;
-        public Form2(string quyenhan)
+        public Form2(int quyenhan, string tendangnhap)
         {
             _quyenhan = quyenhan;
             InitializeComponent();
+            _tendangnhap = tendangnhap;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -30,6 +32,7 @@ namespace WindowsFormsApp2
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            this.label3.Text = "Xin chào, " + _tendangnhap;
             string strConnection = System.Configuration.ConfigurationSettings.AppSettings["MyCNN"].ToString();
             string strCommand = "Select id, ten from LOP";
             SqlConnection myConnection = new SqlConnection(strConnection);
@@ -44,7 +47,7 @@ namespace WindowsFormsApp2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Lichhoc Lichhoc = new Lichhoc(1);
+            Lichhoc Lichhoc = new Lichhoc((int)this.comboBox1.SelectedValue, _quyenhan);
             Lichhoc.ShowDialog();
         }
 
@@ -56,8 +59,18 @@ namespace WindowsFormsApp2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form5 Diemdanh = new Form5();
+            Form5 Diemdanh = new Form5((int)this.comboBox1.SelectedValue, _quyenhan);
             Diemdanh.ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

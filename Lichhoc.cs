@@ -14,16 +14,22 @@ namespace WindowsFormsApp2
     public partial class Lichhoc : Form
     {
         private int _idLopHoc;
-        public Lichhoc(int idLopHoc)
+        int _quyenhan;
+        public Lichhoc(int idLopHoc, int quyenhan)
         {
             InitializeComponent();
             _idLopHoc = idLopHoc;
+            _quyenhan = quyenhan;
             LoadLichHoc();
+            if(_quyenhan == 0)
+                this.button1.Visible = false;
         }
         private void LoadLichHoc()
         {
+            dataGridView1.Rows.Clear();
+            dataGridView1.Refresh();
             string strConnection = System.Configuration.ConfigurationSettings.AppSettings["MyCNN"].ToString();
-            string query = "SELECT lop.ngaybatdau, khoahoc.sobuoihoc, lichhoc.*, taikhoan.ten, lop.diachi, khoahoc.tenkhoahoc FROM lop INNER JOIN lichhoc on lop.id = lichhoc.idlophoc INNER JOIN khoahoc on lop.idkhoahoc = khoahoc.idkhoahoc inner join Taikhoan on lop.idgiangvien = taikhoan.id";
+            string query = "SELECT lop.ngaybatdau, khoahoc.sobuoihoc, lichhoc.*, taikhoan.ten, lop.diachi, khoahoc.tenkhoahoc FROM lop INNER JOIN lichhoc on lop.id = lichhoc.idlophoc INNER JOIN khoahoc on lop.idkhoahoc = khoahoc.idkhoahoc inner join Taikhoan on lop.idgiangvien = taikhoan.id where lop.id = @idLopHoc";
             using (SqlConnection connection = new SqlConnection(strConnection))
             {
                 string[] arrDayOfWeek = new string[] { "chunhat", "thu2", "thu3", "thu4", "thu5", "thu6", "thu7" };
@@ -78,6 +84,13 @@ namespace WindowsFormsApp2
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form8 sualichhoc = new Form8(_idLopHoc);
+            sualichhoc.ShowDialog();
+            LoadLichHoc();
         }
     }
 }

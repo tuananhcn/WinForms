@@ -14,9 +14,9 @@ namespace WindowsFormsApp2
     public partial class Form4 : Form
     {
         int _idlop;
-        string _quyenhan;
+        int _quyenhan;
         public Diemso selectedDiemSo;
-        public Form4(int idlop, string quyenhan)
+        public Form4(int idlop, int quyenhan)
         {
             InitializeComponent();
             _idlop = idlop;
@@ -24,6 +24,12 @@ namespace WindowsFormsApp2
         }
         private void LoadDSSV()
         {
+            if(_quyenhan == 0)
+            {
+                this.button1.Visible = false;
+                this.button2.Visible = false;
+            }    
+
             string strConnection = System.Configuration.ConfigurationSettings.AppSettings["MyCNN"].ToString();
             string strCommand = "select DIEMSO.iddssv,TAIKHOAN.ten, TAIKHOAN.ngaythangnamsinh, TAIKHOAN.gioitinh, TAIKHOAN.diachi, DIEMSO.diem1, DIEMSO.diem2, DIEMSO.diem3 from LOP, DANHSACHSINHVIEN, DIEMSO, TAIKHOAN where LOP.id = DANHSACHSINHVIEN.idlop AND DANHSACHSINHVIEN.idtaikhoan = TAIKHOAN.id AND DIEMSO.iddssv = DANHSACHSINHVIEN.iddssv AND DANHSACHSINHVIEN.idlop = @idlop";
             SqlConnection myConnection = new SqlConnection(strConnection);
@@ -55,6 +61,8 @@ namespace WindowsFormsApp2
         }
         private void RetrieveCurrentRow(DataGridViewCellEventArgs e)
         {
+            try
+            {
             DataGridViewRow dr = this.dataGridView1.Rows[e.RowIndex];
             /*this.Text = dr.Cells["OrderID"].Value.ToString();*/
             selectedDiemSo = new Diemso();
@@ -63,12 +71,16 @@ namespace WindowsFormsApp2
             selectedDiemSo.diem1 = float.Parse(dr.Cells["diem1"].Value.ToString());
             selectedDiemSo.diem2 = float.Parse(dr.Cells["diem2"].Value.ToString());
             selectedDiemSo.diem3 = float.Parse(dr.Cells["diem3"].Value.ToString());
+            }
+            catch(Exception ex) { 
+                Console.WriteLine(ex.Message);
+            }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        /*private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             RetrieveCurrentRow(e);
-        }
+        }*/
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -79,11 +91,8 @@ namespace WindowsFormsApp2
         {
             Form6 themSV = new Form6(_idlop);
             themSV.ShowDialog();
+            LoadDSSV();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

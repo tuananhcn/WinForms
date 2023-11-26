@@ -38,7 +38,7 @@ namespace WindowsFormsApp2
                     while (myReader.Read())
                     {
 
-                        Form2 Trangchu = new Form2(myReader["quyenhan"].ToString());
+                        Form2 Trangchu = new Form2(Convert.ToInt32(myReader["quyenhan"]), myReader["tendangnhap"].ToString());
                         Trangchu.ShowForm1 += ShowForm1Method;
                         this.Hide();
                         Trangchu.Show();

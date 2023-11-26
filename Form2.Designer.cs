@@ -35,11 +35,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(138, 100);
+            this.button1.Location = new System.Drawing.Point(177, 100);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(149, 89);
             this.button1.TabIndex = 0;
@@ -59,7 +60,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(138, 258);
+            this.button3.Location = new System.Drawing.Point(177, 258);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(149, 89);
             this.button3.TabIndex = 2;
@@ -103,12 +104,22 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Lớp học";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(624, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 16);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "label3";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
@@ -133,5 +144,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
